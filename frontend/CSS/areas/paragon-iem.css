@@ -1,0 +1,207 @@
+:root {
+  --iem-background: url("../../../assets/areas/iem/iem-bg.png");
+}
+
+body {
+  background:
+    linear-gradient(rgba(5, 5, 5, 0.58), rgba(5, 5, 5, 0.72)),
+    var(--iem-background) center / cover fixed;
+  background-color: #050505;
+}
+
+.bm-grid {
+  grid-template-columns: repeat(2, minmax(220px, 260px));
+  margin: 0 auto;
+  max-width: calc(2 * 260px + var(--bm-gap));
+}
+
+.bm-grid > .bm-branch {
+  display: flex;
+}
+
+.bm-grid > .bm-branch > .bm-card {
+  flex: none;
+  height: 500px;
+  width: 100%;
+}
+
+.horizontal-connector {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: min(260px + var(--bm-gap), 100%);
+}
+
+.team-details > .um-card {
+  background: linear-gradient(
+    145deg,
+    rgba(40, 40, 40, 0.78),
+    rgba(8, 8, 8, 0.94)
+  );
+  border: 1px solid rgba(226, 184, 62, 0.78);
+  border-radius: 20px;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.42);
+  height: auto;
+  min-height: 0;
+  min-width: 0;
+  max-width: 260px;
+  padding: 22px 14px 18px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.team-details::after {
+  height: 30px;
+  left: 50%;
+}
+
+.team-details:has(> .um-card:nth-of-type(3)) {
+  grid-template-columns: repeat(3, minmax(0, 260px));
+  width: calc(3 * 260px + (2 * var(--um-gap)));
+}
+
+.team-details:has(> .um-card:nth-of-type(4)) {
+  grid-template-columns: repeat(4, minmax(0, 260px));
+  width: calc(4 * 260px + (3 * var(--um-gap)));
+}
+
+@media (max-width: 650px) {
+  .am-profile {
+    grid-template-columns: 1fr;
+  }
+
+  .am-photo-wrap {
+    height: 285px;
+    justify-self: center;
+    width: min(100%, 214px);
+  }
+
+  .bm-grid {
+    display: block;
+    margin: auto;
+    max-width: 350px;
+  }
+
+  .bm-grid > .bm-branch {
+    display: block;
+    margin-bottom: var(--bm-gap);
+    width: 100%;
+  }
+
+  .bm-grid > .bm-branch > .bm-card {
+    box-sizing: border-box;
+    flex: none;
+    height: 400px;
+    min-height: 0;
+    width: 100%;
+  }
+
+  .bm-grid > .bm-branch > .bm-card-without-logo {
+    height: auto;
+    min-height: 300px;
+    padding-bottom: 22px;
+  }
+
+  .bm-grid > .bm-branch:nth-child(2) > .bm-card {
+    height: auto;
+    min-height: 500px;
+  }
+
+  .avatar {
+    height: 108px;
+    width: 108px;
+  }
+
+  .horizontal-connector,
+  .main-connector,
+  .bm-branch::before {
+    display: none;
+  }
+
+  .team-details:has(> .um-card + .um-card),
+  .team-details:has(> .um-card:nth-of-type(3)),
+  .team-details:has(> .um-card:nth-of-type(4)) {
+    grid-template-columns: 1fr !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+  }
+
+  .team-expander[open] .team-details {
+    align-items: start;
+    display: grid;
+    grid-auto-rows: max-content;
+    grid-template-columns: 1fr !important;
+    left: 0 !important;
+    position: absolute;
+    row-gap: 18px;
+    top: calc(100% + 30px);
+    transform: none !important;
+    width: 100% !important;
+  }
+
+  .team-expander[open] .um-card {
+    height: auto;
+    justify-self: stretch;
+    max-width: none;
+    min-height: 0;
+    width: 100%;
+  }
+}
+
+@media (min-width: 651px) and (max-width: 1400px) {
+  .team-expander[open] .team-details > .mobile-um-title {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    text-align: center;
+    width: 100%;
+  }
+
+  .team-expander[open] .team-details > .um-card {
+    grid-row: auto;
+  }
+}
+
+@media (min-width: 651px) and (max-width: 1100px) {
+  .bm-grid {
+    display: block;
+    margin: 0 auto;
+    max-width: 420px;
+    width: calc(100% - 48px);
+  }
+
+  .bm-grid > .bm-branch {
+    display: block;
+    margin-bottom: 18px;
+    width: 100%;
+  }
+
+  .bm-grid > .bm-branch > .bm-card {
+    box-sizing: border-box;
+    height: auto;
+    min-height: 360px;
+    width: 100%;
+  }
+
+  .team-expander[open] .team-details {
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(calc(100vw - 48px), 680px);
+  }
+
+  .team-expander[open] .team-details > .mobile-um-title {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    text-align: center;
+  }
+
+  .team-expander[open] .team-details > .um-card {
+    box-sizing: border-box;
+    grid-row: auto;
+    justify-self: center;
+    max-width: none;
+    min-width: 0;
+    width: 100%;
+  }
+}
