@@ -41,7 +41,7 @@ if (videoSoundToggle && heroVideoFile) {
 
 if (heroVideoFile) {
   heroVideoFile.volume = 1;
-  heroVideoFile.muted = false;
+  heroVideoFile.muted = true;
   window.setTimeout(() => {
     heroVideoFile.play().catch(() => {
       // Browsers may block playback until the user interacts with the page.
