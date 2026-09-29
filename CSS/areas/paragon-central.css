@@ -388,7 +388,7 @@ body::before {
   height: 100%;
   justify-content: center;
   letter-spacing: 0.12em;
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
 }
 .avatar-inner::before {
@@ -745,6 +745,7 @@ body::before {
   margin-top: 3px;
   overflow-wrap: anywhere;
 }
+/* 0px-650px: mobile back-to-top button sizing. */
 @media (max-width: 650px) {
   .team-details:has(> .um-card + .um-card) {
     width: 100%;
@@ -829,6 +830,7 @@ body::before {
 .back-to-top:focus-visible .back-to-top-label {
   display: none;
 }
+/* 0px-650px: duplicate mobile chart/UM detail column fallback; later rules override earlier rules. */
 @media (max-width: 650px) {
   .back-to-top {
     bottom: 18px;
@@ -837,6 +839,8 @@ body::before {
     width: 44px;
   }
 }
+
+/* 0px-1000px: shared tablet/mobile hero, profile, BM card, and UM sizing. */
 @media (max-width: 1000px) {
   body {
     background-attachment: scroll;
@@ -932,6 +936,7 @@ body::before {
     text-align: center;
   }
 }
+/* 651px-1000px: tablet stacked BM branches and expanded UM cards. */
 @media (min-width: 651px) and (max-width: 1000px) {
   .bm-grid {
     display: block;
@@ -957,7 +962,7 @@ body::before {
   .team-details::before,
   .team-details::after,
   .team-details > .um-card::before {
-    display: none;
+    display: block;
   }
   .mobile-chart-title {
     color: var(--gold-light);
@@ -1029,6 +1034,7 @@ body::before {
     text-align: center;
   }
 }
+/* 651px-1100px landscape: duplicate tiger-eye five-column UM layout; overridden below by tablet rules. */
 @media (min-width: 651px) and (max-width: 1100px) and (orientation: landscape) {
   .team-expander[open] .tiger-eye-team-details {
     grid-template-columns: repeat(5, 180px) !important;
@@ -1052,6 +1058,7 @@ body::before {
     width: 180px;
   }
 }
+/* 651px-1100px landscape: duplicate tiger-eye layout refinement; overrides the preceding block. */
 @media (min-width: 651px) and (max-width: 1100px) and (orientation: landscape) {
   .team-expander[open] .tiger-eye-team-details {
     grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -1071,6 +1078,7 @@ body::before {
     width: 100%;
   }
 }
+/* 1101px-1400px landscape: medium BM width and UM grid columns. */
 @media (min-width: 1101px) and (max-width: 1400px) and (orientation: landscape) {
   .bm-grid {
     max-width: 560px;
@@ -1091,6 +1099,7 @@ body::before {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .team-expander[open] .team-details > .mobile-um-title {
+    display: block !important;
     grid-column: 1 / -1;
     grid-row: 1;
   }
@@ -1098,6 +1107,7 @@ body::before {
     grid-row: 2;
   }
 }
+/* 651px-1100px portrait: two-column tiger-eye UM layout. */
 @media (min-width: 651px) and (max-width: 1100px) and (orientation: portrait) {
   .team-expander[open] .tiger-eye-team-details {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1113,6 +1123,7 @@ body::before {
     grid-row: auto;
   }
 }
+/* 651px-1400px landscape: duplicate tiger-eye five-column layout; later tablet overrides take precedence. */
 @media (min-width: 651px) and (max-width: 1400px) and (orientation: landscape) {
   .team-expander[open] .tiger-eye-team-details {
     box-sizing: border-box;
@@ -1139,6 +1150,7 @@ body::before {
     width: 100%;
   }
 }
+/* 1101px-1400px landscape: tiger-eye UM width override. */
 @media (min-width: 1101px) and (max-width: 1400px) and (orientation: landscape) {
   .team-expander[open] .tiger-eye-team-details {
     margin-left: auto;
@@ -1146,6 +1158,7 @@ body::before {
     width: min(calc(100vw - 96px), 1200px);
   }
 }
+/* 651px-1100px: shared tablet tiger-eye two-column layout. */
 @media (min-width: 651px) and (max-width: 1100px) {
   .team-expander[open] .tiger-eye-team-details {
     box-sizing: border-box;
@@ -1172,6 +1185,7 @@ body::before {
     width: 100%;
   }
 }
+/* 651px-1100px landscape: duplicate UM row/column placement override. */
 @media (min-width: 651px) and (max-width: 1100px) and (orientation: landscape) {
   .team-expander[open] .team-details {
     grid-auto-flow: row;
@@ -1192,6 +1206,7 @@ body::before {
     grid-row: 2;
   }
 }
+/* 651px-1400px portrait/landscape: duplicate tiger-eye grid-flow and title placement. */
 @media (min-width: 651px) and (max-width: 1400px) and (orientation: portrait),
   (min-width: 651px) and (max-width: 1400px) and (orientation: landscape) {
   .team-expander[open] .tiger-eye-team-details {
@@ -1206,6 +1221,7 @@ body::before {
     grid-row: auto;
   }
 }
+/* 1101px-1400px landscape: single-UM and expanded UM panel placement. */
 @media (min-width: 1101px) and (max-width: 1400px) and (orientation: landscape) {
   .team-details:not(:has(> .um-card + .um-card)) {
     grid-template-columns: 1fr;
@@ -1230,6 +1246,7 @@ body::before {
     grid-row: 2;
   }
 }
+/* 651px-1100px portrait plus 1101px-1400px landscape: duplicate UM title/card row placement. */
 @media (min-width: 651px) and (max-width: 1100px) and (orientation: portrait),
   (min-width: 1101px) and (max-width: 1400px) and (orientation: landscape) {
   .team-expander[open] .team-details > .mobile-um-title {
@@ -1240,6 +1257,7 @@ body::before {
     grid-row: 2;
   }
 }
+/* 651px-1100px portrait plus 1101px-1400px landscape: hide connector lines and use compact BM cards. */
 @media (min-width: 651px) and (max-width: 1100px) and (orientation: portrait),
   (min-width: 1101px) and (max-width: 1400px) and (orientation: landscape) {
   .horizontal-connector,
@@ -1288,6 +1306,7 @@ body::before {
     width: 100%;
   }
 }
+/* 651px-1100px portrait: narrow BM grid and two-column UM details. */
 @media (min-width: 651px) and (max-width: 1100px) and (orientation: portrait) {
   .bm-grid {
     max-width: 420px;
@@ -1301,6 +1320,7 @@ body::before {
     width: min(calc(100vw - 48px), 680px);
   }
 }
+/* 1101px-1400px landscape: medium BM grid and UM detail widths. */
 @media (min-width: 1101px) and (max-width: 1400px) and (orientation: landscape) {
   .bm-grid {
     max-width: 560px;
@@ -1308,13 +1328,14 @@ body::before {
   }
   .team-details:has(> .um-card + .um-card) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: min(calc(100vw - 72px), 900px);
+    width: min(calc(100vw - 48px), 900px);
   }
   .team-details:has(> .um-card:nth-of-type(3)) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    width: min(calc(100vw - 72px), 1200px);
+    width: min(calc(100vw - 48px), 1200px);
   }
 }
+/* 651px-1000px: duplicate UM card/avatar sizing from the earlier tablet block. */
 @media (min-width: 651px) and (max-width: 1000px) {
   .team-details > .um-card {
     max-width: none;
@@ -1326,6 +1347,21 @@ body::before {
     width: 108px;
   }
 }
+/* 651px-1400px: duplicate UM overflow and wrapping safeguards. */
+/* 651px-1400px: intermediate BM grid arrangement; overlaps later 651px-1400px overrides. */
+@media (min-width: 651px) and (max-width: 1400px) {
+  .team-details > .um-card {
+    min-width: 0;
+    overflow: hidden;
+  }
+  .um-card .bm-name,
+  .um-card > .bm-placeholder,
+  .um-card .agent-name {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+}
+/* 651px-1100px portrait plus 651px-1400px landscape: shared stacked BM and UM scaling. */
 @media (min-width: 651px) and (max-width: 1100px) and (orientation: portrait),
   (min-width: 651px) and (max-width: 1400px) and (orientation: landscape) {
   .bm-grid {
@@ -1398,6 +1434,7 @@ body::before {
     font-size: clamp(16px, 1.8vw, 20px);
   }
 }
+/* 651px-1100px portrait: final portrait BM/card dimensions. */
 @media (min-width: 651px) and (max-width: 1100px) and (orientation: portrait) {
   .bm-grid {
     max-width: 420px;
@@ -1450,6 +1487,7 @@ body::before {
     font-size: 20px;
   }
 }
+/* 1101px-1400px landscape: final UM grid width and card placement. */
 @media (min-width: 1101px) and (max-width: 1400px) and (orientation: landscape) {
   .team-details:has(> .um-card + .um-card) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1472,6 +1510,7 @@ body::before {
     transform: translateX(-50%);
   }
 }
+/* 651px-1100px portrait: final UM detail width and two-column placement. */
 @media (min-width: 651px) and (max-width: 1100px) and (orientation: portrait) {
   .team-details:has(> .um-card + .um-card) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1496,6 +1535,7 @@ body::before {
     transform: translateX(-50%);
   }
 }
+/* 0px-650px: final mobile page, BM stack, connector hiding, and UM stack. */
 @media (max-width: 650px) {
   .page {
     padding-top: 20px;
@@ -1608,5 +1648,727 @@ body::before {
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
+}
+
+@media (min-width: 651px) and (max-width: 1400px) {
+  .horizontal-connector,
+  .main-connector,
+  .bm-branch::before {
+    display: none;
+  }
+  .mobile-chart-title {
+    color: var(--gold-light);
+    display: block;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0 auto 28px;
+    text-align: center;
+  }
+  .bm-grid {
+    display: grid;
+    gap: clamp(18px, 2.5vw, 34px);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    margin: 0 auto;
+    max-width: 1100px;
+    width: min(calc(100% - 24px), 1100px);
+  }
+  .bm-grid > .bm-branch {
+    grid-column: span 2;
+    margin: 0;
+    width: auto;
+  }
+  .bm-grid > .bm-branch:nth-child(1) {
+    grid-column: 2 / span 2;
+    grid-row: 2;
+    order: 4;
+  }
+  .bm-grid > .bm-branch:nth-child(2) {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    order: 1;
+  }
+  .bm-grid > .bm-branch:nth-child(3) {
+    grid-column: 3 / span 2;
+    grid-row: 1;
+    order: 2;
+  }
+  .bm-grid > .bm-branch:nth-child(4) {
+    grid-column: 5 / span 2;
+    grid-row: 1;
+    order: 3;
+  }
+  .bm-grid > .bm-branch:nth-child(5) {
+    grid-column: 4 / span 2;
+    grid-row: 2;
+    order: 5;
+  }
+  .bm-grid > .bm-branch > .bm-card {
+    height: auto;
+    min-height: clamp(340px, 30vw, 400px);
+    width: 100%;
+  }
+  .team-details::before,
+  .team-details::after,
+  .team-details > .um-card::before {
+    display: block;
+  }
+  .team-expander[open] .team-details:not(.tiger-eye-team-details),
+  .team-expander[open]
+    .team-details:not(.tiger-eye-team-details):has(> .um-card + .um-card),
+  .team-expander[open]
+    .team-details:not(.tiger-eye-team-details):has(> .um-card:nth-of-type(3)),
+  .team-expander[open]
+    .team-details:not(.tiger-eye-team-details):has(> .um-card:nth-of-type(4)),
+  .team-expander[open]
+    .team-details:not(.tiger-eye-team-details):has(> .um-card:nth-of-type(5)) {
+    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr;
+    left: 0;
+    margin: 0;
+    padding-top: 24px;
+    position: relative;
+    row-gap: 16px;
+    top: auto;
+    transform: none;
+    width: 100%;
+  }
+  .team-expander[open] .team-details > .mobile-um-title {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .team-expander[open] .team-details > .um-card {
+    grid-row: auto;
+    max-width: none;
+    width: 100%;
+  }
+}
+
+/* 0px-1400px: shared compact UM panel positioning; overrides many earlier UM rules. */
+@media (max-width: 1400px) {
+  .mobile-chart-title {
+    display: block;
+  }
+  .bm-grid {
+    justify-content: center;
+  }
+  .team-expander[open] .team-details,
+  .team-expander[open] .team-details:has(> .um-card + .um-card),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
+    align-items: start;
+    display: grid;
+    left: 50%;
+    margin: 0;
+    padding-top: 30px;
+    position: absolute;
+    top: calc(100% + 30px);
+    transform: translateX(-50%);
+    width: min(calc(100vw - 48px), 1200px);
+  }
+  .team-expander[open] .team-details:has(> .um-card + .um-card) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .team-expander[open] .team-details > .mobile-um-title {
+    display: none;
+  }
+  .team-expander[open] .team-details::after {
+    display: block;
+    height: 30px;
+    top: 0;
+  }
+  .team-expander[open] .team-details::before {
+    display: block;
+    top: 30px;
+  }
+  .team-expander[open] .team-details > .um-card::before {
+    display: block;
+    top: -30px;
+  }
+  .team-expander[open] .team-details > .um-card {
+    padding: 14px 10px 14px;
+  }
+  .team-expander[open] .team-details > .um-card .avatar,
+  .team-expander[open] .team-details > .um-card .um-avatar {
+    height: 76px;
+    width: 76px;
+  }
+  .team-expander[open] .team-details > .um-card .bm-name {
+    font-size: 16px;
+    min-height: 36px;
+  }
+  .team-expander[open] .team-details > .um-card > .bm-placeholder {
+    font-size: 13px;
+  }
+  .team-expander[open] .tiger-eye-team-details::after {
+    left: calc((100% - (4 * var(--um-gap))) / 10);
+  }
+}
+/* ========================================================================== */
+/* PARAGON CENTRAL RESPONSIVE STYLING                                        */
+/* Pixel ranges:                                                            */
+/* 1700px+ landscape = full desktop chart and five BM columns               */
+/* 1400px-1699px landscape = compact desktop chart                          */
+/* 1001px-1399px landscape = scaled landscape chart                         */
+/* 651px-1000px = tablet layout                                               */
+/* 0px-650px = mobile layout                                                  */
+/* Rules below are ordered as late responsive overrides.                     */
+/* ========================================================================== */
+/* 1401px+: tiger-eye UM trunk element. */
+/* 1401px+: desktop tiger-eye trunk centering; overlaps the earlier 1401px+ rule intentionally. */
+@media (min-width: 1401px) {
+  .team-expander[open] .tiger-eye-team-details::after {
+    left: 50%;
+  }
+}
+/* All widths: hide the mobile-only UM heading element by default. */
+.mobile-um-title {
+  display: none !important;
+}
+/* 1101px-1400px landscape: UM detail grid, UM cards, and tiger-eye UM grid. */
+/* 1101px-1400px landscape: final three-column UM detail and tiger-eye grid. */
+@media (min-width: 1101px) and (max-width: 1400px) and (orientation: landscape) {
+  .team-expander[open] .team-details:has(> .um-card + .um-card) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: min(calc(100vw - 72px), 1200px);
+  }
+  .team-expander[open] .team-details > .um-card {
+    box-sizing: border-box;
+    min-width: 0;
+    width: 100%;
+  }
+  .team-expander[open] .tiger-eye-team-details {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: min(calc(100vw - 72px), 1200px);
+  }
+}
+/* 651px-1100px: UM detail grid and UM card sizing. */
+/* 651px-1100px: final two-column tablet UM detail grid. */
+@media (min-width: 651px) and (max-width: 1100px) {
+  .team-expander[open] .team-details:has(> .um-card + .um-card) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(calc(100vw - 48px), 680px);
+  }
+  .team-expander[open] .team-details > .um-card {
+    box-sizing: border-box;
+    min-width: 0;
+    width: 100%;
+  }
+}
+/* 0px-650px: UM detail grid and UM cards become one full-width column. */
+/* 0px-650px: final one-column mobile UM detail grid. */
+@media (max-width: 650px) {
+  .team-expander[open] .team-details,
+  .team-expander[open] .team-details:has(> .um-card + .um-card) {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+  .team-expander[open] .team-details > .um-card {
+    box-sizing: border-box;
+    min-width: 0;
+    width: 100%;
+  }
+}
+/* 1400px+ landscape: UM detail positioning, UM columns, cards, avatars, and names. */
+/* 1400px+ landscape: large UM card scale and one-to-five-column UM grids. */
+@media (min-width: 1400px) and (orientation: landscape) {
+  .team-expander[open] .team-details,
+  .team-expander[open] .team-details:has(> .um-card + .um-card),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
+    align-items: start;
+    display: grid;
+    left: 50%;
+    padding-top: 30px;
+    position: absolute;
+    top: calc(100% + 30px);
+    transform: translateX(-50%);
+  }
+  .team-expander[open] .team-details:has(> .um-card + .um-card) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(calc(200% + var(--um-gap)), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: min(calc(300% + (2 * var(--um-gap))), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: min(calc(400% + (3 * var(--um-gap))), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    width: min(calc(500% + (4 * var(--um-gap))), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details > .um-card {
+    padding: 22px 14px 18px;
+    width: 100%;
+  }
+  .team-expander[open] .team-details > .um-card .avatar,
+  .team-expander[open] .team-details > .um-card .um-avatar {
+    height: 108px;
+    width: 108px;
+  }
+  .team-expander[open] .team-details > .um-card .bm-name {
+    font-size: 20px;
+    min-height: 46px;
+  }
+}
+/* 1001px-1399px landscape: connectors, BM grid, BM branches, BM cards, avatars, names, and UM panels. */
+/* 1001px-1399px landscape: scaled desktop connectors, BM grid, cards, and UM panels. */
+@media (min-width: 1001px) and (max-width: 1399px) and (orientation: landscape) {
+  .horizontal-connector,
+  .main-connector,
+  .bm-branch::before,
+  .team-details::before,
+  .team-details::after,
+  .team-details > .um-card::before {
+    display: block;
+  }
+  .bm-grid {
+    display: grid;
+    gap: clamp(12px, 1.5vw, 20px);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    max-width: 1100px;
+    width: calc(100% - 36px);
+  }
+  .bm-grid > .bm-branch {
+    display: block;
+    margin: 0;
+    width: auto;
+  }
+  .bm-grid > .bm-branch:nth-child(1) {
+    grid-column: 2 / span 2;
+    grid-row: 2;
+  }
+  .bm-grid > .bm-branch:nth-child(2) {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+  .bm-grid > .bm-branch:nth-child(3) {
+    grid-column: 3 / span 2;
+    grid-row: 1;
+  }
+  .bm-grid > .bm-branch:nth-child(4) {
+    grid-column: 5 / span 2;
+    grid-row: 1;
+  }
+  .bm-grid > .bm-branch:nth-child(5) {
+    grid-column: 4 / span 2;
+    grid-row: 2;
+  }
+  .bm-grid > .bm-branch > .bm-card {
+    height: clamp(320px, 27vw, 400px);
+    min-height: 0;
+    padding: clamp(16px, 1.5vw, 22px) clamp(10px, 1.1vw, 14px)
+      clamp(30px, 3vw, 48px);
+  }
+  .bm-grid > .bm-branch > .bm-card .avatar {
+    height: clamp(76px, 7vw, 108px);
+    width: clamp(76px, 7vw, 108px);
+  }
+  .bm-grid > .bm-branch > .bm-card .bm-name {
+    font-size: clamp(15px, 1.6vw, 20px);
+    min-height: clamp(36px, 3.6vw, 46px);
+  }
+  .bm-grid > .bm-branch > .bm-card .bm-manager-name {
+    font-size: clamp(14px, 1.5vw, 20px);
+  }
+  .team-expander[open] .team-details,
+  .team-expander[open] .team-details:has(> .um-card + .um-card),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
+    align-items: start;
+    display: grid;
+    left: 50%;
+    padding-top: 30px;
+    position: absolute;
+    top: calc(100% + 30px);
+    transform: translateX(-50%);
+  }
+  .team-expander[open] .team-details:has(> .um-card + .um-card) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(calc(200% + var(--um-gap)), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: min(calc(300% + (2 * var(--um-gap))), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: min(calc(400% + (3 * var(--um-gap))), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    width: min(calc(500% + (4 * var(--um-gap))), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details > .um-card {
+    box-sizing: border-box;
+    min-width: 0;
+    padding: clamp(16px, 1.5vw, 22px) clamp(10px, 1.1vw, 14px)
+      clamp(14px, 1.3vw, 18px);
+    width: 100%;
+  }
+  .team-expander[open] .team-details > .um-card .avatar,
+  .team-expander[open] .team-details > .um-card .um-avatar {
+    height: clamp(76px, 7vw, 108px);
+    width: clamp(76px, 7vw, 108px);
+  }
+  .team-expander[open] .team-details > .um-card .bm-name {
+    font-size: clamp(15px, 1.6vw, 20px);
+    min-height: clamp(36px, 3.6vw, 46px);
+  }
+}
+/* 1700px+ landscape: full-size connectors, five-column BM grid, BM branches, BM cards, and UM panels. */
+/* 1700px+ landscape: single authoritative desktop connector, BM grid, and UM panel rules. */
+@media (min-width: 1700px) and (orientation: landscape) {
+  /* Connector geometry: keep the AM trunk, BM bus, BM drops, and UM drops aligned. */
+  .org-chart {
+    --bm-gap: clamp(14px, 1.8vw, 24px);
+  }
+  .horizontal-connector {
+    left: calc((100% - (4 * var(--bm-gap))) / 10);
+    right: calc((100% - (4 * var(--bm-gap))) / 10);
+    top: 0;
+  }
+  .main-connector {
+    height: 90px;
+    top: -90px;
+    z-index: 1;
+  }
+  .bm-branch::before,
+  .team-details > .um-card::before {
+    height: 30px;
+    width: 2px;
+    z-index: 1;
+  }
+  /* Connector elements: enable the AM trunk, BM bus, BM drops, and UM drops. */
+  .horizontal-connector,
+  .main-connector,
+  .bm-branch::before,
+  .team-details::before,
+  .team-details::after,
+  .team-details > .um-card::before {
+    display: block;
+  }
+  /* BM grid element: restore five equal desktop columns. */
+  .bm-grid {
+    display: grid;
+    gap: var(--bm-gap);
+    grid-template-columns: repeat(5, minmax(150px, 1fr));
+    padding-top: 30px;
+  }
+  /* BM branch elements: restore normal desktop flow and ordering. */
+  .bm-grid > .bm-branch {
+    display: block;
+    grid-column: auto;
+    grid-row: auto;
+    margin: 0;
+    order: initial;
+    width: auto;
+  }
+  /* BM card elements: restore the fixed desktop card height and spacing. */
+  .bm-grid > .bm-branch > .bm-card {
+    height: 400px;
+    min-height: 0;
+    padding: 22px 14px 48px;
+  }
+  /* UM detail elements: position expanded UM panels beneath each BM card. */
+  .team-expander[open] .team-details,
+  .team-expander[open] .team-details:has(> .um-card + .um-card),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
+    align-items: start;
+    display: grid;
+    left: 50%;
+    padding-top: 30px;
+    position: absolute;
+    top: calc(100% + 30px);
+    transform: translateX(-50%);
+  }
+  /* UM column elements: size expanded panels according to their card count. */
+  .team-expander[open] .team-details:has(> .um-card + .um-card) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(calc(200% + var(--um-gap)), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: min(calc(300% + (2 * var(--um-gap))), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: min(calc(400% + (3 * var(--um-gap))), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    width: min(calc(500% + (4 * var(--um-gap))), calc(100vw - 36px));
+  }
+  /* UM card elements: keep expanded cards visible outside their BM container. */
+  .team-expander[open] .team-details > .um-card {
+    overflow: visible;
+  }
+}
+/* 651px-1699px landscape: compact connectors, five-column BM grid, BM cards, avatars, names, and UM panels. */
+/* 651px-1699px landscape: final compact connector, BM grid, BM card, and UM panel rules. */
+@media (min-width: 651px) and (max-width: 1699px) and (orientation: landscape) {
+  .org-chart {
+    --bm-gap: clamp(14px, 1.8vw, 24px);
+  }
+  .horizontal-connector,
+  .main-connector,
+  .bm-branch::before,
+  .team-details::before,
+  .team-details::after,
+  .team-details > .um-card::before {
+    display: block;
+  }
+  .horizontal-connector {
+    height: 2px;
+    left: calc((100% - 4 * var(--bm-gap)) / 10);
+    right: calc((100% - 4 * var(--bm-gap)) / 10);
+    top: 0;
+    transform: none;
+    width: auto;
+  }
+  .main-connector {
+    height: 90px;
+    top: -90px;
+    width: 2px;
+  }
+  .bm-branch::before,
+  .team-details > .um-card::before {
+    height: 30px;
+    width: 2px;
+  }
+  .mobile-chart-title,
+  .mobile-um-title {
+    display: none !important;
+  }
+  .bm-grid {
+    display: grid;
+    gap: clamp(14px, 1.8vw, 24px);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin-inline: auto;
+    max-width: 1100px;
+    padding-top: 30px;
+    width: min(calc(100% - 36px), 1100px);
+  }
+  .bm-grid > .bm-branch {
+    display: block;
+    grid-column: auto;
+    grid-row: auto;
+    margin: 0;
+    order: initial;
+    width: auto;
+  }
+  .bm-grid > .bm-branch > .bm-card {
+    height: clamp(250px, 23.55vw, 400px);
+    min-height: 0;
+    padding: clamp(12px, 1.3vw, 22px) clamp(8px, 0.85vw, 14px)
+      clamp(22px, 2.8vw, 48px);
+  }
+  .bm-grid > .bm-branch > .bm-card .avatar,
+  .team-expander[open] .team-details > .um-card .avatar,
+  .team-expander[open] .team-details > .um-card .um-avatar {
+    height: clamp(76px, 7vw, 108px);
+    width: clamp(76px, 7vw, 108px);
+  }
+  .bm-grid > .bm-branch > .bm-card .bm-name {
+    font-size: clamp(10px, 0.82vw, 15px);
+    min-height: clamp(26px, 2.1vw, 36px);
+  }
+  .team-expander[open] .team-details > .um-card .bm-name {
+    font-size: clamp(13px, 1.18vw, 20px);
+    min-height: clamp(30px, 2.7vw, 46px);
+  }
+  .mobile-chart-title,
+  .mobile-um-title {
+    color: var(--gold-light);
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .mobile-chart-title {
+    font-size: clamp(24px, 2.4vw, 34px);
+    margin: 0 auto 28px;
+  }
+  .mobile-um-title {
+    font-size: clamp(18px, 1.8vw, 24px);
+    grid-column: 1 / -1;
+    margin: 0 0 14px;
+    width: 100%;
+  }
+  .team-expander[open] .team-details,
+  .team-expander[open] .team-details:has(> .um-card + .um-card),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(3)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(4)),
+  .team-expander[open] .team-details:has(> .um-card:nth-of-type(5)) {
+    align-items: start;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    left: 50%;
+    padding-top: 30px;
+    position: absolute;
+    top: calc(100% + 30px);
+    transform: translateX(-50%);
+    width: min(calc(220% + var(--um-gap)), calc(100vw - 36px));
+  }
+  .team-expander[open] .team-details > .um-card {
+    box-sizing: border-box;
+    justify-self: stretch;
+    min-width: 0;
+    overflow: visible;
+    padding: clamp(16px, 1.5vw, 22px) clamp(10px, 1.1vw, 14px)
+      clamp(14px, 1.3vw, 18px);
+    width: 100%;
+  }
+  .team-expander[open] .tiger-eye-team-details {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    width: min(calc(500% + (4 * var(--um-gap))), calc(100vw - 36px)) !important;
+  }
+  .team-expander[open] .tiger-eye-team-details > .um-card {
+    grid-column: auto !important;
+    grid-row: 1 !important;
+  }
+}
+/* 1300px-1699px landscape: BM card names and manager names. */
+/* 1300px-1699px landscape: final BM name and manager-name scaling. */
+@media (min-width: 1300px) and (max-width: 1699px) and (orientation: landscape) {
+  .bm-grid > .bm-branch > .bm-card .bm-name {
+    font-size: clamp(16px, 1.25vw, 20px);
+    min-height: clamp(34px, 2.8vw, 40px);
+  }
+  .bm-grid > .bm-branch > .bm-card .bm-manager-name {
+    font-size: clamp(14px, 1vw, 25px);
+  }
+}
+/* 651px-1400px: hide desktop connectors; reposition BM grid, branches, cards, and UM panels. */
+/* 651px-1400px: final compact chart override; hides connectors and stacks non-tiger-eye UM panels. */
+@media (min-width: 651px) and (max-width: 1400px) {
+  .horizontal-connector,
+  .main-connector,
+  .bm-branch::before,
+  .team-details::before,
+  .team-details::after,
+  .team-details > .um-card::before {
+    display: none;
+  }
+  .mobile-chart-title,
+  .mobile-um-title {
+    display: block !important;
+  }
+  .bm-grid {
+    display: grid;
+    gap: clamp(16px, 2vw, 28px);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    max-width: 900px;
+    width: min(calc(100% - 48px), 900px);
+  }
+  .bm-grid > .bm-branch {
+    grid-column: span 2;
+    grid-row: 1;
+    margin: 0;
+    width: auto;
+  }
+  .bm-grid > .bm-branch:nth-child(1) {
+    grid-column: 2 / span 2;
+    grid-row: 2;
+  }
+  .bm-grid > .bm-branch:nth-child(2) {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+  .bm-grid > .bm-branch:nth-child(3) {
+    grid-column: 3 / span 2;
+    grid-row: 1;
+  }
+  .bm-grid > .bm-branch:nth-child(4) {
+    grid-column: 5 / span 2;
+    grid-row: 1;
+  }
+  .bm-grid > .bm-branch:nth-child(5) {
+    grid-column: 4 / span 2;
+    grid-row: 2;
+  }
+  .bm-grid > .bm-branch > .bm-card {
+    height: auto;
+    min-height: clamp(320px, 30vw, 350px);
+    width: 100%;
+  }
+  .team-expander[open] .team-details:not(.tiger-eye-team-details),
+  .team-expander[open]
+    .team-details:not(.tiger-eye-team-details):has(> .um-card + .um-card),
+  .team-expander[open]
+    .team-details:not(.tiger-eye-team-details):has(> .um-card:nth-of-type(3)),
+  .team-expander[open]
+    .team-details:not(.tiger-eye-team-details):has(> .um-card:nth-of-type(4)),
+  .team-expander[open]
+    .team-details:not(.tiger-eye-team-details):has(> .um-card:nth-of-type(5)) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    left: 50%;
+    max-width: 500px;
+    padding-top: 24px;
+    position: absolute;
+    top: calc(100% + 24px);
+    transform: translateX(-50%);
+    width: min(calc(100vw - 48px), 500px);
+  }
+  .team-expander[open] .team-details > .mobile-um-title {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+  .team-expander[open] .team-details > .um-card {
+    grid-row: auto;
+    max-width: none;
+    width: 100%;
+  }
+  .team-expander[open] .tiger-eye-team-details {
+    display: grid !important;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: auto 1fr;
+    max-width: 1100px !important;
+    padding-top: 24px;
+    width: min(calc(100vw - 48px), 1100px) !important;
+  }
+  .team-expander[open] .tiger-eye-team-details > .mobile-um-title {
+    display: block !important;
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    position: static !important;
+    justify-self: center;
+    text-align: center;
+    width: max-content !important;
+  }
+  .team-expander[open] .tiger-eye-team-details > .um-card {
+    grid-column: auto !important;
+    grid-row: 2 !important;
+  }
+  .team-expander[open] .team-details > .mobile-um-title {
+    align-items: center;
+    left: auto;
+    display: block !important;
+    position: static;
+    text-align: center;
+    transform: none;
+    width: 100%;
+  }
+  .team-expander[open] .team-details::before,
+  .team-expander[open] .team-details::after,
+  .team-expander[open] .team-details > .um-card::before {
+    display: none;
   }
 }

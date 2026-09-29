@@ -1,0 +1,30 @@
+Options -MultiViews
+RewriteEngine On
+
+# Serve the homepage at the bare domain.
+RewriteRule ^$ home.html [END]
+
+# Send the old homepage URL to the site root.
+RewriteCond %{THE_REQUEST} \s/+home\.html(?:[?\s]) [NC]
+RewriteRule ^home\.html$ / [R=301,L]
+
+# Send .html requests to clean URLs.
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html(?:[?\s]) [NC]
+RewriteRule ^(.+)\.html$ /$1 [R=301,L,NE]
+
+# Friendly page names.
+RewriteRule ^about/?$ about.html [END]
+RewriteRule ^announcements/?$ announcements.html [END]
+RewriteRule ^contact/?$ contact.html [END]
+RewriteRule ^products/?$ prod-serv.html [END]
+RewriteRule ^careers/?$ join.html [END]
+RewriteRule ^ascent/?$ paragon-ascent.html [END]
+RewriteRule ^central/?$ paragon-central.html [END]
+RewriteRule ^belimitless/?$ paragon-blimitless.html [END]
+RewriteRule ^ironeagles/?$ paragon-iem.html [END]
+
+# Serve any remaining root-level HTML page without exposing .html.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.+?)/?$ $1.html [END]

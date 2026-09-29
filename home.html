@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The Mega Paragon - people, systems, and momentum working as one."
+    />
+    <title>The Mega Paragon | Home</title>
+    <link rel="stylesheet" href="CSS/styles.css" />
+    <link rel="stylesheet" href="CSS/home.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/mainlogo/MP_Logo_Horizontal_Colored.png"
+    />
+  </head>
+
+  <!--Main Page-->
+  <body class="home-page">
+    <!--Navbar-->
+    <header class="site-header">
+      <nav class="main-nav" aria-label="Main navigation">
+        <button
+          class="menu-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <!--logo-->
+        <a class="brand" href="home.html" aria-label="The Mega Paragon home">
+          <img
+            src="assets/mainlogo/MP_Logo_Horizontal_Colored.png"
+            alt="The Mega Paragon"
+          />
+        </a>
+        <!--about-dropdown-->
+        <div class="nav-dropdown">
+          <div class="about-dropdown">
+            <a href="about.html">About Us</a>
+            <a href="prod-serv.html">Products & Services</a>
+            <a href="join.html">Join Us</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+        <a class="login-link" href="https://www.themegaparagon.net/login">
+          Login
+        </a>
+      </nav>
+    </header>
+
+    <main class="page-main">
+      <section class="hero-video">
+        <div class="hero-media">
+          <video
+            class="hero-video-file"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="metadata"
+            aria-label="The Mega Paragon background video"
+          >
+            <source src="assets/placeholder.mp4" type="video/mp4" />
+          </video>
+          <img
+            class="video-fallback-logo"
+            src="assets/mainlogo/logo-horizontal-colored.png"
+            alt="The Mega Paragon"
+          />
+          <div class="video-controls" aria-label="Video controls">
+            <button id="videoPlayPause" type="button" aria-label="Pause video">
+              <span class="video-control-icon" aria-hidden="true"
+                >&#10074;&#10074;</span
+              >
+            </button>
+            <div class="volume-btn-wrapper">
+              <input
+                id="videoVolume"
+                class="volume-slider"
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value="1"
+                aria-label="Video volume"
+              />
+              <button
+                id="videoSoundToggle"
+                type="button"
+                aria-label="Mute video"
+              >
+                <span class="video-control-icon" aria-hidden="true"
+                  >&#128266;</span
+                >
+              </button>
+            </div>
+            <button
+              id="videoFullscreen"
+              type="button"
+              aria-label="Enter fullscreen"
+            >
+              <span class="video-control-icon" aria-hidden="true"
+                >&#x26F6;</span
+              >
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="news-section page-content" id="announcements">
+        <div class="section-heading">
+          <div>
+            <p class="page-kicker">WHAT'S HAPPENING</p>
+            <h2>Stay Informed. <em>Stay Connected.</em></h2>
+          </div>
+          <p>
+            Get the latest updates on our announcements, upcoming events, and
+            company news. Be part of our journey.
+          </p>
+        </div>
+        <div class="news-container">
+          <div class="news-grid"></div>
+        </div>
+        <div class="news-footer">
+          <a href="announcements.html" class="view-all-btn"
+            >View All Updates →</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <div
+      class="announcement-modal"
+      id="homeAnnouncementModal"
+      aria-hidden="true"
+    >
+      <article
+        class="announcement-modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="homeAnnouncementModalTitle"
+      >
+        <button
+          class="announcement-modal-close"
+          id="homeAnnouncementModalClose"
+          type="button"
+          aria-label="Close announcement"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <span class="news-tag" id="homeAnnouncementModalTag"></span>
+        <span class="event-date" id="homeAnnouncementModalDate"></span>
+        <h2 id="homeAnnouncementModalTitle"></h2>
+        <p id="homeAnnouncementModalBody"></p>
+      </article>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-section footer-brand">
+          <img
+            src="assets/mainlogo/The Mega Paragon Logo_Horizontal_Gold.png"
+            alt="The Mega Paragon"
+          />
+          <p class="footer-commitment">
+            Committed to Excellence. <br />Committed to You.
+          </p>
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"
+              ><i class="fa-brands fa-facebook-f" aria-hidden="true"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fa-brands fa-instagram" aria-hidden="true"></i
+            ></a>
+            <a href="#" aria-label="YouTube"
+              ><i class="fa-brands fa-youtube" aria-hidden="true"></i
+            ></a>
+            <a href="#" aria-label="TikTok"
+              ><i class="fa-brands fa-tiktok" aria-hidden="true"></i
+            ></a>
+          </div>
+        </div>
+        <div class="footer-categories">
+          <div class="footer-section">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="about.html">About Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Products &amp; Services</h4>
+            <ul>
+              <li><a href="prod-serv.html">Financial Solutions</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Contacts</h4>
+            <ul>
+              <li><a href="join.html">Careers</a></li>
+              <li><a href="contact.html">Free Consultation</a></li>
+            </ul>
+          </div>
+          <div class="footer-section footer-partners">
+            <h4>Our Partners</h4>
+            <img src="assets/partners/prulife-logo.png" alt="Pru Life U.K." />
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <a class="footer-privacy" href="#">Privacy Policy</a>
+        <div class="footer-center">
+          <span class="tagline">TRUST | GROWTH | TOGETHER</span>
+          <span>&copy; 2026 The Mega Paragon. All Rights Reserved.</span>
+        </div>
+        <a class="footer-terms" href="#">Terms of Service</a>
+      </div>
+    </footer>
+    <script src="JS/announcements.js"></script>
+    <script src="JS/navigation.js"></script>
+    <script src="JS/home.js"></script>
+  </body>
+</html>

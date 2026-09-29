@@ -453,15 +453,17 @@ body.profile-nav-page {
 .product-contact-grid {
   align-items: center;
   display: grid;
-  gap: 55px;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 42px;
+  grid-template-columns: minmax(0, 760px);
+  justify-content: center;
   margin-left: auto;
   margin-right: auto;
-  max-width: 980px;
+  max-width: 760px;
 }
 .product-contact-copy {
-  align-self: start;
-  padding-top: 0;
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
 }
 .product-contact-copy .product-kicker,
 .product-contact-form-card .product-kicker {
@@ -474,32 +476,14 @@ body.profile-nav-page {
   font-size: 42px;
   font-weight: 500;
   line-height: 1.15;
-  margin: 0 0 18px;
+  margin: 0;
 }
 .product-contact-copy > p:not(.product-kicker),
 .product-contact-form-card > p:not(.product-kicker) {
   color: #d8e5ed;
   font-size: 15px;
   line-height: 1.6;
-  margin: 0 0 25px;
-}
-.product-contact-info {
-  display: grid;
-  gap: 34px;
-  margin-top: 34px;
-}
-.product-contact-info p {
-  border-left: 3px solid #d9a441;
-  color: #d8e5ed;
-  font-size: 13px;
-  line-height: 1.5;
-  margin: 0;
-  padding-left: 14px;
-}
-.product-contact-info strong {
-  color: #fff;
-  display: inline-block;
-  margin-bottom: 3px;
+  margin: 12px 0 0;
 }
 .product-contact-form-card {
   background: #fff;
@@ -512,6 +496,7 @@ body.profile-nav-page {
 .product-contact-form-card h3 {
   color: #062d49;
   font-size: 25px;
+  font-weight: 700;
   margin-bottom: 8px;
 }
 .product-contact-form-card > p:not(.product-kicker) {
