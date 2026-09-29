@@ -40,14 +40,23 @@ if (videoSoundToggle && heroVideoFile) {
 }
 
 if (heroVideoFile) {
-  heroVideoFile.volume = 1;
   heroVideoFile.muted = true;
-  window.setTimeout(() => {
-    heroVideoFile.play().catch(() => {
-      // Browsers may block playback until the user interacts with the page.
-    });
-  }, 1500);
+
+  heroVideoFile.addEventListener("loadedmetadata", () => {
+    heroVideoFile.currentTime = 3;
+    heroVideoFile.pause();
+  }, { once: true });
 }
+
+// if (heroVideoFile) {
+//   heroVideoFile.volume = 1;
+//   heroVideoFile.muted = true;
+//   window.setTimeout(() => {
+//     heroVideoFile.play().catch(() => {
+//       // Browsers may block playback until the user interacts with the page.
+//     });
+//   }, 1500);
+// }
 
 if (videoVolume && heroVideoFile) {
   videoVolume.addEventListener("input", () => {
