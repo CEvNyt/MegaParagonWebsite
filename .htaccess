@@ -13,6 +13,7 @@ RewriteCond %{THE_REQUEST} \s/+(.+?)\.html(?:[?\s]) [NC]
 RewriteRule ^(.+)\.html$ /$1 [R=301,L,NE]
 
 # Friendly page names.
+RewriteRule ^home/?$ home.html [END]
 RewriteRule ^about/?$ about.html [END]
 RewriteRule ^announcements/?$ announcements.html [END]
 RewriteRule ^contact/?$ contact.html [END]
