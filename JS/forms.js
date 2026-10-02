@@ -35,11 +35,10 @@ function setupForm(form) {
 
     try {
       let payload;
-      const contentType =
-        form.enctype === "multipart/form-data" ? "form" : "json";
+      const isJoinForm = formType === "join";
 
-      if (contentType === "form") {
-        // Handle multipart form data (file uploads for join-team)
+      if (isJoinForm) {
+        // Keep join-team as multipart form data for the portal endpoint.
         const formData = new FormData(form);
         payload = new FormData();
 
@@ -50,12 +49,12 @@ function setupForm(form) {
           } else {
             payload.append(
               key,
-              key === "cv" ? value : sanitizeInput(String(value)),
+              value instanceof File ? value : sanitizeInput(String(value)),
             );
           }
         }
       } else {
-        // Handle JSON payload for inquiries (map name -> full_name)
+        // Build the inquiry JSON payload using the portal field names.
         const formData = new FormData(form);
         payload = {};
         for (let [key, value] of formData.entries()) {
@@ -83,14 +82,14 @@ function setupForm(form) {
         Accept: "application/json",
       };
 
-      // Add Content-Type only for JSON payloads
-      if (contentType === "json") {
+      // Add Content-Type only for JSON payloads.
+      if (!isJoinForm) {
         headers["Content-Type"] = "application/json";
       }
 
       const response = await fetch(endpoint, {
         method: "POST",
-        body: contentType === "form" ? payload : JSON.stringify(payload),
+        body: isJoinForm ? payload : JSON.stringify(payload),
         headers: headers,
       });
 
