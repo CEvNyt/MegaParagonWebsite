@@ -13,31 +13,11 @@ body {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.first-um-connector .team-details:has(> .um-card:nth-of-type(3))::after {
-  left: calc((100% - (2 * var(--um-gap))) / 6);
-}
-
-.first-um-connector .team-details:has(> .um-card:nth-of-type(3)) {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  left: 0;
-  transform: none;
-  width: calc(300% + (2 * var(--um-gap)));
-}
-
-.first-um-connector .team-details:has(> .um-card:nth-of-type(4)) {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  left: 0;
-  transform: none;
-  width: calc(400% + (3 * var(--um-gap)));
-}
-
-.first-um-connector .team-details:has(> .um-card:nth-of-type(3))::after {
-  height: 60px;
-}
-
-.first-um-connector .team-details:has(> .um-card:nth-of-type(4))::after {
-  height: 60px;
-  left: calc((100% - (3 * var(--um-gap))) / 8);
+@media (min-width: 1001px) and (max-width: 1699px) {
+  .horizontal-connector {
+    left: 17.8%;
+    right: 17.8%;
+  }
 }
 
 .bm-card-with-agents {
@@ -45,6 +25,55 @@ body {
   box-sizing: border-box;
   height: auto;
   min-height: 430px;
+}
+.bm-card-ascent-alpha {
+  height: auto !important;
+  min-height: 0;
+}
+.bm-card-ascent-alpha .bm-agents {
+  flex-shrink: 0;
+}
+.alpha-um-connector .team-details::after {
+  left: calc((100% - (2 * var(--um-gap))) / 6);
+}
+.team-expander[open].alpha-um-connector .team-details::after {
+  left: calc((100% - (2 * var(--um-gap))) / 6) !important;
+}
+.alpha-um-connector .team-details {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  left: 0;
+  transform: none;
+  width: calc(300% + (2 * var(--um-gap)));
+}
+.draco-um-connector .team-details::after {
+  left: calc((100% - (3 * var(--um-gap))) / 8);
+}
+@media (min-width: 651px) {
+  .team-expander[open].alpha-um-connector .team-details {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    left: 0 !important;
+    margin: 0 !important;
+    padding-top: 30px !important;
+    position: absolute !important;
+    top: calc(100% + 30px) !important;
+    transform: none !important;
+    width: calc(300% + (2 * var(--um-gap))) !important;
+  }
+
+  .team-expander[open].draco-um-connector .team-details {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    left: 0 !important;
+    margin: 0 !important;
+    padding-top: 30px !important;
+    position: absolute !important;
+    top: calc(100% + 30px) !important;
+    transform: none !important;
+    width: calc(400% + (3 * var(--um-gap))) !important;
+  }
+
+  .team-expander[open].draco-um-connector .team-details::after {
+    left: calc((100% - (3 * var(--um-gap))) / 8) !important;
+  }
 }
 .bm-card-without-logo {
   height: auto;

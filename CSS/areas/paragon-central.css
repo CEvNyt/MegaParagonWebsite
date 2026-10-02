@@ -336,6 +336,12 @@ body::before {
   width: 2px;
   z-index: 1;
 }
+@media (min-width: 1001px) and (max-width: 1699px) {
+  .horizontal-connector {
+    left: 16%;
+    right: 16%;
+  }
+}
 .bm-card {
   align-items: center;
   background: linear-gradient(

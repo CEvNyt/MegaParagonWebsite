@@ -1,7 +1,6 @@
-// Backend routes for each form. Update these values when the API is deployed.
 const FORM_ENDPOINTS = {
   join: "/api/forms/join",
-  quote: "/api/forms/quote",
+  inquiry: "/api/forms/inquiry",
 };
 
 const FORM_MESSAGES = {
@@ -11,7 +10,7 @@ const FORM_MESSAGES = {
     error:
       "We could not submit your application right now. Please try again later.",
   },
-  quote: {
+  inquiry: {
     success:
       "Thank you for your inquiry. Our team will contact you soon about your consultation.",
     error: "We could not send your inquiry right now. Please try again later.",
@@ -22,8 +21,7 @@ async function submitForm(formType, form) {
   const endpoint = FORM_ENDPOINTS[formType];
   if (!endpoint) throw new Error(`Unknown form type: ${formType}`);
 
-  // Join includes a CV file, so it must use multipart FormData.
-  // Quote contains text fields only, so it is sent as JSON.
+  // Recruitment includes a CV file, so it uses multipart FormData.
   const isMultipart = formType === "join";
   const body = isMultipart
     ? new FormData(form)
