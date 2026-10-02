@@ -55,6 +55,10 @@ function portal_request(string $type): void
             if (!is_string($value)) fail_request(422, 'Invalid form field.');
             $body[$name === 'name' ? 'full_name' : $name] = $value;
         }
+        // Require a CV even when browser form validation is bypassed.
+        if (!isset($_FILES['cv']) || ($_FILES['cv']['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+            fail_request(422, 'Please upload your CV.');
+        }
         foreach ($_FILES as $name => $upload) {
             if ($name !== 'cv') fail_request(422, 'Unsupported file field.');
             if (is_array($upload['error'])) fail_request(422, 'Invalid CV upload.');
