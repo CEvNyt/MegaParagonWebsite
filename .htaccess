@@ -1,6 +1,17 @@
 Options -MultiViews
 RewriteEngine On
 
+# Keep secrets, Git metadata and backend code private on Apache/LiteSpeed.
+RewriteRule (^|/)\. - [F,L]
+RewriteRule ^backend(?:/|$) - [F,L]
+<FilesMatch "^(serve\.js|package(-lock)?\.json)$">
+  Require all denied
+</FilesMatch>
+
+# Existing PHP API files must bypass friendly HTML URL rewriting.
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^api/ - [L]
+
 # Serve the homepage at the bare domain.
 RewriteRule ^$ home.html [END]
 

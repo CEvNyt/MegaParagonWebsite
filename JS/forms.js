@@ -1,6 +1,6 @@
 /**
  * Forms.js - Handle form submission with data sanitization
- * Sends to the Node server, which loads .env and authenticates with the portal.
+ * Sends to the PHP proxy, which loads .env and authenticates with the portal.
  * Secret API keys must never be included in browser JavaScript.
  */
 
@@ -17,8 +17,8 @@ function setupForm(form) {
 
   // Determine portal endpoint based on form type
   const endpoints = {
-    join: "/api/join",
-    inquiry: "/api/inquiry",
+    join: "/api/join.php",
+    inquiry: "/api/inquiry.php",
   };
 
   const endpoint = endpoints[formType];
@@ -67,7 +67,7 @@ function setupForm(form) {
         }
       }
 
-      // The Node server adds X-API-Key; the browser sends only public form data.
+      // The PHP proxy adds X-API-Key; the browser sends only public form data.
       const headers = { Accept: "application/json" };
 
       // Add Content-Type only for JSON payloads
@@ -88,7 +88,7 @@ function setupForm(form) {
         try {
           data = JSON.parse(responseText);
         } catch {
-          data = { message: responseText };
+          throw new Error("The form endpoint returned an unexpected response. Check that the PHP API files are deployed.");
         }
       }
 

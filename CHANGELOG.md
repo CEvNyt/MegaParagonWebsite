@@ -1,3 +1,13 @@
+## 2026-10-02 — Adapt deployment to Hostinger public_html
+
+- Add PHP join, inquiry and announcement proxies with server-side .env loading.
+- Replace Node route URLs in browser scripts with actual .php endpoints.
+- Preserve optional CV support without restoring the removed CV form field.
+- Block private configuration/backend paths in .htaccess.
+- Version browser script URLs to refresh cached Node-only code.
+- Return clear JSON errors instead of leaking upstream HTML error pages.
+- Document Hostinger deployment, nested website folders and verification.
+
 ## 2026-10-02 — Fix portal form submissions
 
 - Replace browser process.env access with same-origin Node API routes.
