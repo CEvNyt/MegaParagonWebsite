@@ -72,9 +72,14 @@ function setupForm(form) {
         join: process.env.JOIN_TEAM_API_KEY,
         inquiry: process.env.INQUIRIES_API_KEY,
       };
+      const apiKey = apiKeyMap[formType];
+
+      if (!apiKey || apiKey === "undefined") {
+        throw new Error(`Missing API key for ${formType} form`);
+      }
 
       const headers = {
-        "X-API-Key": apiKeyMap[formType],
+        "X-API-Key": apiKey,
         Accept: "application/json",
       };
 
@@ -89,7 +94,16 @@ function setupForm(form) {
         headers: headers,
       });
 
-      const data = await response.json();
+      const responseText = await response.text();
+      let data = {};
+
+      if (responseText) {
+        try {
+          data = JSON.parse(responseText);
+        } catch {
+          data = { message: responseText };
+        }
+      }
 
       if (!response.ok) {
         throw new Error(data.error || data.message || "Submission failed");
