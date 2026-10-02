@@ -4,9 +4,9 @@ This repository contains the Mega Paragon website source code and media assets. 
 
 ## Project Structure
 
-- `frontend/HTML/` - website pages
+- root `*.html` files - website pages
 - `frontend/CSS/` - page and shared stylesheets
-- `frontend/JS/` - page behavior and navigation scripts
+- `JS/` - shared page behavior, form handling, and tracking scripts
 - `assets/` - approved website images, logos, and other media
 
-Open `frontend/HTML/home.html` in a browser to preview the website locally. No package installation or build step is required.
+Open `home.html` in a browser to preview the live page set locally. The form backend requires the setup documented in `backend/README.md`.

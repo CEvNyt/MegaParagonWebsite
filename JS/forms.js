@@ -1,6 +1,6 @@
 const FORM_ENDPOINTS = {
-  join: "/api/forms/join",
   inquiry: "/api/forms/inquiry",
+  join: "/api/forms/join",
 };
 
 const FORM_MESSAGES = {
@@ -42,7 +42,7 @@ async function submitForm(formType, form) {
 
 function setupForm(form) {
   const formType = form.dataset.formType;
-  // Each form owns its status element so Join and Quote can show independent messages.
+  // Each form owns its status element so inquiry and recruitment messages stay independent.
   const message = form.querySelector(".form-message");
   const submitButton = form.querySelector("[type=submit]");
   const formMessages = FORM_MESSAGES[formType];
@@ -56,6 +56,11 @@ function setupForm(form) {
     try {
       await submitForm(formType, form);
       message.textContent = formMessages.success;
+      if (typeof window.fbq === "function") {
+        window.fbq("track", "Lead", {
+          content_name: formType === "join" ? "Recruitment" : "Sales",
+        });
+      }
       form.reset();
     } catch (error) {
       console.error(`${formType} form submission failed:`, error);
