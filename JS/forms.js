@@ -17,8 +17,8 @@ function setupForm(form) {
 
   // Determine portal endpoint based on form type
   const endpoints = {
-    join: "https://portal.themegaparagon.net/api/v1/website/join-team",
-    inquiry: "https://portal.themegaparagon.net/api/v1/website/inquiries",
+    join: process.env.JOIN_TEAM_ENDPOINT,
+    inquiry: process.env.INQUIRIES_ENDPOINT,
   };
 
   const endpoint = endpoints[formType];
@@ -69,8 +69,8 @@ function setupForm(form) {
 
       // Prepare headers with API key authentication from config.js (sourced from .env)
       const apiKeyMap = {
-        join: API_CONFIG.JOIN_TEAM_API_KEY,
-        inquiry: API_CONFIG.INQUIRIES_API_KEY,
+        join: process.env.JOIN_TEAM_API_KEY,
+        inquiry: process.env.INQUIRIES_API_KEY,
       };
 
       const headers = {

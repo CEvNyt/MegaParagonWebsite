@@ -43,8 +43,8 @@ const{data} = await res.json();
 */
 
 // Shared announcement connection and rendering for home.html and announcements.html.
-const apiKey = "9eebdea0e048aa01f1dfab0d3c870656c1290d3387980277";
-const announcementsApiUrl = "https://portal.themegaparagon.net/api/v1/announcements";
+const apiKey = process.env.ANNOUNCEMENTS_API_KEY;
+const announcementsApiUrl = process.env.ANNOUNCEMENTS_ENDPOINT;
 
 function getAnnouncementCategory(announcement) {
   return announcement.category?.name || announcement.category || "Announcement";
