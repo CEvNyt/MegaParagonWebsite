@@ -1,74 +1,127 @@
-const FORM_ENDPOINTS = {
-  inquiry: "/api/forms/inquiry",
-  join: "/api/forms/join",
-};
+/**
+ * Forms.js - Handle form submission with data sanitization
+ * Sends directly to portal API endpoints with API key authentication
+ * API Keys sourced from: config.js (which loads from .env)
+ */
 
-const FORM_MESSAGES = {
-  join: {
-    success:
-      "Thank you for applying. Our team will review your application and contact you soon.",
-    error:
-      "We could not submit your application right now. Please try again later.",
-  },
-  inquiry: {
-    success:
-      "Thank you for your inquiry. Our team will contact you soon about your consultation.",
-    error: "We could not send your inquiry right now. Please try again later.",
-  },
-};
-
-async function submitForm(formType, form) {
-  const endpoint = FORM_ENDPOINTS[formType];
-  if (!endpoint) throw new Error(`Unknown form type: ${formType}`);
-
-  // Recruitment includes a CV file, so it uses multipart FormData.
-  const isMultipart = formType === "join";
-  const body = isMultipart
-    ? new FormData(form)
-    : JSON.stringify(Object.fromEntries(new FormData(form)));
-
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: isMultipart ? {} : { "Content-Type": "application/json" },
-    body,
-  });
-
-  if (!response.ok) {
-    throw new Error(`Form submission failed with HTTP ${response.status}`);
-  }
-
-  return response;
+function sanitizeInput(input) {
+  if (typeof input !== "string") return input;
+  // Remove HTML tags and trim whitespace
+  return input.replace(/<[^>]*>/g, "").trim();
 }
 
 function setupForm(form) {
-  const formType = form.dataset.formType;
-  // Each form owns its status element so inquiry and recruitment messages stay independent.
-  const message = form.querySelector(".form-message");
+  const formType = form.dataset.formType || form.id.replace("Form", "");
+  const messageDiv = form.querySelector(".form-message");
   const submitButton = form.querySelector("[type=submit]");
-  const formMessages = FORM_MESSAGES[formType];
+
+  // Determine portal endpoint based on form type
+  const endpoints = {
+    join: "https://portal.themegaparagon.net/api/v1/website/join-team",
+    inquiry: "https://portal.themegaparagon.net/api/v1/website/inquiries",
+  };
+
+  const endpoint = endpoints[formType];
+  if (!endpoint) {
+    console.error("Unknown form type:", formType);
+    return;
+  }
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    message.textContent = "Sending...";
-    message.classList.add("is-visible");
+    messageDiv.textContent = "Sending...";
+    messageDiv.classList.add("is-visible");
     submitButton.disabled = true;
 
     try {
-      await submitForm(formType, form);
-      message.textContent = formMessages.success;
+      let payload;
+      const contentType =
+        form.enctype === "multipart/form-data" ? "form" : "json";
+
+      if (contentType === "form") {
+        // Handle multipart form data (file uploads for join-team)
+        const formData = new FormData(form);
+        payload = new FormData();
+
+        // Map form fields to API field names
+        for (let [key, value] of formData.entries()) {
+          if (key === "name") {
+            payload.append("full_name", sanitizeInput(String(value)));
+          } else {
+            payload.append(
+              key,
+              key === "cv" ? value : sanitizeInput(String(value)),
+            );
+          }
+        }
+      } else {
+        // Handle JSON payload for inquiries (map name -> full_name)
+        const formData = new FormData(form);
+        payload = {};
+        for (let [key, value] of formData.entries()) {
+          if (key === "name") {
+            payload["full_name"] = sanitizeInput(String(value));
+          } else {
+            payload[key] = sanitizeInput(String(value));
+          }
+        }
+      }
+
+      // Prepare headers with API key authentication from config.js (sourced from .env)
+      const apiKeyMap = {
+        join: API_CONFIG.JOIN_TEAM_API_KEY,
+        inquiry: API_CONFIG.INQUIRIES_API_KEY,
+      };
+
+      const headers = {
+        "X-API-Key": apiKeyMap[formType],
+        Accept: "application/json",
+      };
+
+      // Add Content-Type only for JSON payloads
+      if (contentType === "json") {
+        headers["Content-Type"] = "application/json";
+      }
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body: contentType === "form" ? payload : JSON.stringify(payload),
+        headers: headers,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || data.message || "Submission failed");
+      }
+
+      messageDiv.textContent =
+        data.message || "Thank you! We will get back to you soon.";
+      messageDiv.classList.add("success");
+
+      // Fire Meta Pixel event on success
       if (typeof window.fbq === "function") {
         window.fbq("track", "Lead", {
           content_name: formType === "join" ? "Recruitment" : "Sales",
         });
       }
-      form.reset();
+
+      // Reset form after delay
+      setTimeout(() => {
+        form.reset();
+        messageDiv.textContent = "";
+        messageDiv.classList.remove("is-visible", "success");
+      }, 2000);
     } catch (error) {
       console.error(`${formType} form submission failed:`, error);
-      message.textContent = formMessages.error;
+      messageDiv.textContent =
+        "We could not submit your form right now. Please try again later.";
+      messageDiv.classList.add("error");
     } finally {
       submitButton.disabled = false;
     }
   });
 }
 
+// Initialize all forms with data-form-type attribute
 document.querySelectorAll("form[data-form-type]").forEach(setupForm);

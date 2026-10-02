@@ -271,7 +271,12 @@
               Fill out the form below and our team will get back to you as soon
               as possible.
             </p>
-            <form id="inquiryForm" data-form-type="inquiry">
+            <form
+              id="inquiryForm"
+              data-form-type="inquiry"
+              method="POST"
+              action="https://portal.themegaparagon.net/api/v1/website/inquiries"
+            >
               <div class="product-contact-form-row">
                 <div>
                   <label for="product-contact-name">Full Name *</label
@@ -398,6 +403,7 @@
     </footer>
     <script src="JS/meta-pixel.js"></script>
     <script src="JS/navigation.js"></script>
+    <script src="JS/config.js"></script>
     <script src="JS/forms.js"></script>
     <a class="back-to-top" href="#pageTop" aria-label="Back to top">
       <span aria-hidden="true">
