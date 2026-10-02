@@ -43,8 +43,8 @@ const{data} = await res.json();
 */
 
 // Shared announcement connection and rendering for home.html and announcements.html.
-const apiKey = process.env.ANNOUNCEMENTS_API_KEY;
-const announcementsApiUrl = process.env.ANNOUNCEMENTS_ENDPOINT;
+// Fetch through Node so the announcement key stays on the server.
+const announcementsApiUrl = "/api/announcements";
 
 function getAnnouncementCategory(announcement) {
   return announcement.category?.name || announcement.category || "Announcement";
@@ -277,7 +277,7 @@ function setupAnnouncementInteractions() {
 async function loadAnnouncements() {
   try {
     const response = await fetch(announcementsApiUrl, {
-      headers: { "X-Api-Key": apiKey },
+      headers: { Accept: "application/json" },
     });
     if (!response.ok)
       throw new Error(`Announcements API returned HTTP ${response.status}`);

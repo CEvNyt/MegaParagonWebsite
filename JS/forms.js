@@ -1,7 +1,7 @@
 /**
  * Forms.js - Handle form submission with data sanitization
- * Sends directly to portal API endpoints with API key authentication
- * API Keys sourced from: config.js (which loads from .env)
+ * Sends to the Node server, which loads .env and authenticates with the portal.
+ * Secret API keys must never be included in browser JavaScript.
  */
 
 function sanitizeInput(input) {
@@ -17,8 +17,8 @@ function setupForm(form) {
 
   // Determine portal endpoint based on form type
   const endpoints = {
-    join: process.env.JOIN_TEAM_ENDPOINT,
-    inquiry: process.env.INQUIRIES_ENDPOINT,
+    join: "/api/join",
+    inquiry: "/api/inquiry",
   };
 
   const endpoint = endpoints[formType];
@@ -29,6 +29,7 @@ function setupForm(form) {
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    messageDiv.classList.remove("success", "error");
     messageDiv.textContent = "Sending...";
     messageDiv.classList.add("is-visible");
     submitButton.disabled = true;
@@ -38,7 +39,7 @@ function setupForm(form) {
       const isJoinForm = formType === "join";
 
       if (isJoinForm) {
-        // Keep join-team as multipart form data for the portal endpoint.
+        // Handle multipart form data (file uploads for join-team)
         const formData = new FormData(form);
         payload = new FormData();
 
@@ -54,7 +55,7 @@ function setupForm(form) {
           }
         }
       } else {
-        // Build the inquiry JSON payload using the portal field names.
+        // Handle JSON payload for inquiries (map name -> full_name)
         const formData = new FormData(form);
         payload = {};
         for (let [key, value] of formData.entries()) {
@@ -66,23 +67,10 @@ function setupForm(form) {
         }
       }
 
-      // Prepare headers with API key authentication from config.js (sourced from .env)
-      const apiKeyMap = {
-        join: process.env.JOIN_TEAM_API_KEY,
-        inquiry: process.env.INQUIRIES_API_KEY,
-      };
-      const apiKey = apiKeyMap[formType];
+      // The Node server adds X-API-Key; the browser sends only public form data.
+      const headers = { Accept: "application/json" };
 
-      if (!apiKey || apiKey === "undefined") {
-        throw new Error(`Missing API key for ${formType} form`);
-      }
-
-      const headers = {
-        "X-API-Key": apiKey,
-        Accept: "application/json",
-      };
-
-      // Add Content-Type only for JSON payloads.
+      // Add Content-Type only for JSON payloads
       if (!isJoinForm) {
         headers["Content-Type"] = "application/json";
       }
