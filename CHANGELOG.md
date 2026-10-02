@@ -1,3 +1,13 @@
+## 2026-10-02 — Fix portal form submissions
+
+- Replace browser process.env access with same-origin Node API routes.
+- Load root .env on the server and keep API keys private.
+- Forward inquiry JSON and join multipart/CV uploads with portal authentication.
+- Add the missing backend/server.js entry point and setup documentation.
+- Remove missing config.js script references and proxy announcement reads.
+- Restrict static serving to public pages and assets; add upload limits and portal timeouts.
+- Clear stale success/error classes before form retries.
+
 # The Mega Paragon — Changelog
 
 ---
