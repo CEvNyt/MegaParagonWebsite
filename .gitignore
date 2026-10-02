@@ -1,8 +1,6 @@
 ref-code
 
-Shared
 
 assets/ref
 
 .env
-backend/node_modules/
