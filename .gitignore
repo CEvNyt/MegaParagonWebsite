@@ -4,6 +4,3 @@ ref-code
 assets/ref
 
 .env
-JS/config.js
-
-node_modules/
