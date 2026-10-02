@@ -43,8 +43,8 @@ const{data} = await res.json();
 */
 
 // Shared announcement connection and rendering for home.html and announcements.html.
-// Fetch through Node so the announcement key stays on the server.
-const announcementsApiUrl = "/api/announcements";
+// Fetch through PHP so the announcement key stays on the server.
+const announcementsApiUrl = "/api/announcements.php";
 
 function getAnnouncementCategory(announcement) {
   return announcement.category?.name || announcement.category || "Announcement";

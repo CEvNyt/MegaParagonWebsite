@@ -1,20 +1,16 @@
 # Mega Paragon Website
 
-HTML, CSS and browser JavaScript with a Node.js portal proxy.
+## Hostinger regular public_html hosting
 
-## Run locally or on Node hosting
+Production uses PHP proxies, not a running Node server. PHP 8.0+ with cURL and fileinfo is required.
 
-Requires Node.js 20 or later.
+1. Deploy the HTML, CSS, JS, assets, api folder and root .htaccess together.
+2. Copy .env.example to .env and fill in the portal credentials. Prefer placing it in the parent folder of the deployed website. A root .env fallback is supported and blocked from HTTP access by .htaccess.
+3. Confirm /api/inquiry.php and /api/join.php exist under the public website root. Opening either in a browser should return JSON with Method not allowed (405), not a Hostinger 404 page.
+4. Submit the website forms and verify receipt in the portal. Announcement reads use /api/announcements.php.
 
-1. Run `npm ci --prefix backend`.
-2. Copy `.env.example` to `.env` in the repository root and fill in your portal keys.
-3. Run `node serve.js` from the root, or `npm start --prefix backend`.
-4. Visit http://localhost:8080/home and http://localhost:8080/careers.
+Do not commit real keys. Rotate previously shared keys. If a deployment is nested under public_html/website, configure the document root or existing parent rewrite so /api/*.php resolves into website/api/*.php.
 
-The browser sends join uploads to `/api/join`, inquiries to `/api/inquiry`, and announcement requests to `/api/announcements`. The server reads `.env`, adds the appropriate API key, and forwards requests to the fixed portal endpoints. CV uploads retain their multipart boundary and bytes. Requests have a 10 MB body limit and a 30 second portal timeout.
+Join submits multipart fields with an optional CV; inquiry submits JSON. PHP adds X-API-Key from server configuration and preserves portal JSON status responses. A 10 MB total submission limit and 30 second portal timeout apply. For uploads, PHP upload_max_filesize and post_max_size must also permit the intended size.
 
-Only website pages and CSS, JS, and assets are served publicly. Root configuration and backend files are blocked. Never commit real API keys; rotate any previously shared keys.
-
-## Deployment
-
-The production host must run this Node process and route the website domain to it. Uploading files to Apache public_html with .htaccess alone does not run Node or provide these API routes. Keep private configuration outside any Apache public document root when using an additional web server.
+The Node serve.js entry point is retained for the earlier Node setup; use the PHP-enabled host to test these production PHP routes. npm install and a Node process are not required for Hostinger PHP deployment.
